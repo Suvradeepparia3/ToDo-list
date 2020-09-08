@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <ul>
-      <div className="header">A To-do list App made with React and Material-ui.</div>
+      <div className="header">A To-do list App made with ReactJs and Material-ui.</div>
       </ul>
       <Grid container justify="center" >
         <Grid item lg={4} md={6} xs={10}>

@@ -10,10 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import { Grid, Box } from '@material-ui/core';
 import ToDoList from './ToDoList';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 200,
-    minHeight: 400,
+    minHeight: 480,
   },
   header: {
     fontFamily: 'Caveat, cursive',
@@ -35,19 +36,20 @@ const useStyles = makeStyles((theme) => ({
  function OutlinedCard() {
   const classes = useStyles();
 
-  const [ item, setItem ] = useState("");
+  const [ item, setItem ] = useState('');
   const [ updateList, setUpdateList ] = useState([]);
 
   const newItem = e => {
     setItem(e.target.value)
   }
 
-  const getNewItem = (e) => {
-    e.preventDefault()
-    setUpdateList([...updateList, {item}])
-    setItem("")
-  }
-
+  
+    const getNewItem = (e) => {
+        setUpdateList([...updateList, {item}])
+      setItem("")
+    }
+  
+  
   const deleteItem = (id) => {
     setUpdateList((oldItems) => {
       return oldItems.filter((updateList,index) => {
@@ -70,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
             </Box>
         <Grid container >
             <Box component="span" mt={3} ml={1} xs={4} mb={3}>
-            <input className={classes.text} type="text" placeholder="Add Item" value={item} onChange={newItem} />
+            <input className={classes.text} type="text" placeholder="Add Item" value={item} onChange={newItem} required />
             </Box>
             <Box component="span" xs={1} mb={3}>
             <CardActions>
@@ -84,9 +86,10 @@ const useStyles = makeStyles((theme) => ({
           </Grid>
         </Grid>
     
-        {updateList.map((toDo,index) => (
-            <ToDoList key={index} list={toDo} id={index} onSelect={deleteItem}/>
-        ))}
+      
+          {updateList.map((toDo,index) => (
+           <ToDoList key={index} list={toDo} id={index} onSelect={deleteItem} /> 
+        )) }
           
     
       </CardContent>
