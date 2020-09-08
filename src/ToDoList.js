@@ -17,9 +17,9 @@ function ToDoList(props) {
 
     return (
         <div>
-            
+            {/* content */}
             <li className="list" style={{ textDecoration: line ? "line-through" : null }}>
-            <span onClick={cutIt}>
+            <span onClick={cutIt}> 
             {props.list.item} 
             </span>
             <Tooltip title="Delete" onClick={()=> {props.onSelect(props.id)}} >
