@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -43,12 +43,27 @@ const useStyles = makeStyles((theme) => ({
     setItem(e.target.value)
   }
 
+  const input = useRef(null);
   
     const getNewItem = (e) => {
-        setUpdateList([...updateList, {item}])
+      setUpdateList([...updateList, {item}])
+      input.current.focus()
       setItem("")
     }
+
+    useEffect(() => {
+      if(localStorage.getItem("list") === null) {
+        localStorage.setItem("list", JSON.stringify([]));
+      } else {
+        let list = JSON.parse(localStorage.getItem("list"));
+        console.log(list)
+        setUpdateList(list);
+      }
+     },[])
   
+    useEffect(() => {
+      localStorage.setItem("list", JSON.stringify(updateList))
+    },[updateList])
   
   const deleteItem = (id) => {
     setUpdateList((oldItems) => {
@@ -72,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
             </Box>
         <Grid container >
             <Box component="span" mt={3} ml={1} xs={4} mb={3}>
-            <input className={classes.text} type="text" placeholder="Add Item" value={item} onChange={newItem} required />
+            <input className={classes.text} type="text" placeholder="Add Item" value={item} onChange={newItem} ref={input} />
             </Box>
             <Box component="span" xs={1} mb={3}>
             <CardActions>
