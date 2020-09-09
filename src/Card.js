@@ -85,14 +85,23 @@ const useStyles = makeStyles((theme) => ({
               Make future better
             </Typography>
             </Box>
+
+      <Grid container >
+        <Box mt={1} ml={2}>
+            {updateList.map((toDo,index) => (
+           <ToDoList key={index} list={toDo} id={index} onSelect={deleteItem} /> 
+        )) }
+        </Box>
+      </Grid>
+
         <Grid container >
             <Box component="span" mt={3} ml={1} xs={4} mb={3}>
             <input className={classes.text} type="text" placeholder="Add Item" value={item} onChange={newItem} ref={input} />
             </Box>
             <Box component="span" xs={1} mb={3}>
             <CardActions>
-            <Tooltip title="Add" aria-label="add" onClick={getNewItem}>
-                <Fab color="primary" size="small" >
+            <Tooltip title="Add" aria-label="add" onClick={getNewItem} >
+                <Fab color="primary" size="small">
                     <AddIcon />
                 </Fab>
             </Tooltip>
@@ -102,9 +111,7 @@ const useStyles = makeStyles((theme) => ({
         </Grid>
     
       
-          {updateList.map((toDo,index) => (
-           <ToDoList key={index} list={toDo} id={index} onSelect={deleteItem} /> 
-        )) }
+         
           
     
       </CardContent>
